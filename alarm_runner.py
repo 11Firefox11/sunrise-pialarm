@@ -4,7 +4,7 @@ from os import environ
 from json import load
 from jsonschema import validate as json_validate
 from jsonschema.exceptions import ValidationError
-from environment_variables import ALARM_JSONSCHEMA
+from environment_variables import ALARM_JSONSCHEMA, CLEVER_SLEEP_SECS_SEGMENTS
 from numexpr import evaluate as ne_eval
 
 class AlarmRunner:
@@ -50,8 +50,8 @@ class AlarmRunner:
             self.led_controller.reset()
             return False
         else:
-            if val > 2: 
-                time_sleep(2)
-                return self.clever_sleep(val-2)
+            if val > CLEVER_SLEEP_SECS_SEGMENTS: 
+                time_sleep(CLEVER_SLEEP_SECS_SEGMENTS)
+                return self.clever_sleep(val-CLEVER_SLEEP_SECS_SEGMENTS)
             else: time_sleep(val)
             return True

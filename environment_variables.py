@@ -2,6 +2,7 @@ DEV_MODE = True
 CODES_JSON_PATH = "codes.json"
 RGB_PINS = {"red": 17, "green": 22, "blue": 24}
 ALARM_MODIFY_REGEX_PATTERN = "^(\(|\)|\d+\.\d+|\d+|red|blue|green|[+\-*/%]|i|\s)*$"
+CLEVER_SLEEP_SECS_SEGMENTS = 1
 ALARM_JSONSCHEMA = {
     "type": "object",
     "properties": {
