@@ -39,7 +39,10 @@ class LedController:
 
     def reset(self): self.red = self.green = self.blue = 0
 
-    def transition(self, r=0, g=0, b=0):
+    def transition(self, r=None, g=None, b=None):
+        if not r: r = self.red
+        if not g: g = self.green
+        if not b: b = self.blue
         t = Color(rgb=(self.red/255, self.green/255, self.blue/255)).range_to(Color(rgb=(r/255, g/255, b/255)), 255)
         toReturn = []
         for c in t:
