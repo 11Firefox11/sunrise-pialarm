@@ -1,0 +1,36 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pi Alarm - waiting</title>
+</head>
+<body>
+    <h1>Pi Alarm</h1>
+    <form onsubmit="return sendTime(event)">
+        <input id="t" type="time" value="{{ t }}" required>
+        <button>Apply</button>
+    </form>
+    <p>Set backup alarm about 6 mins after this.</p>
+    <script>
+        function sendTime(e) {
+            e.preventDefault();
+            fetch("/", {
+                method: "POST",
+                headers: {
+                'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    t: document.getElementById("t").value
+                })
+            }).then((val) => {
+                alert("Successfully updated.");
+            });
+            return false;
+        }
+    </script>
+    <style>
+        html, body {color-scheme: dark;}
+    </style>
+</body>
+</html>

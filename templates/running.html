@@ -1,0 +1,42 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pi Alarm - running</title>
+</head>
+<body>
+    <h1>Pi Alarm</h1>
+    <form onsubmit="return sendCode(event)">
+        <input id="code" type="text" autocomplete="off" required>
+        <button>Stop</button>
+    </form>
+    <script>
+        async function sendCode(e) {
+            e.preventDefault();
+            fetch("/", {
+                method: "POST",
+                headers: {
+                'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    code: document.getElementById("code").value
+                })
+            }).then((val) => {
+                val.json().then((val) => {
+                    if (val.status) {
+                        location.reload();
+                    } else {
+                        document.getElementById("code").value = "";
+                        alert("Wrong code!");
+                    }
+                });
+            });
+            return false;
+        }
+    </script>
+    <style>
+        html, body {color-scheme: dark;}
+    </style>
+</body>
+</html>
