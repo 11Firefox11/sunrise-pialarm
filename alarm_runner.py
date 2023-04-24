@@ -28,17 +28,23 @@ class AlarmRunner:
     def start(self):
         replace_vars = {"wait_time": self.wait_time, "red": lambda: self.led_controller.red, "green": lambda: self.led_controller.green, "blue": lambda: self.led_controller.blue}
         for step in self.steps:
-            if (range_data:=step.get("range")) or (transition_data:=step.get("transition")):
-                if range_data:
-                    for i in range(range_data.get("start", 0), range_data.get("stop", 10), range_data.get("step", 1)):
-                        self.run_modify(step.get("modify", {}), {**replace_vars, "i":i})
-                        if not self.clever_sleep(self.wait_time if step["sleep"] == "wait_time" else step["sleep"]): return
-                elif transition_data:
-                    for rgb in self.led_controller.transition(transition_data.get("red"), transition_data.get("green"), transition_data.get("blue")):
-                        self.run_modify(step.get("modify", {}), {**replace_vars, "r":rgb[0], "g": rgb[1], "b": rgb[2]})
-                        if not self.clever_sleep(self.wait_time if step["sleep"] == "wait_time" else step["sleep"]): return
-            else:
-                self.clever_sleep(step["sleep"])
+            self.run_step(replace_vars, step)
+        if self.repeat_last:
+            while True:
+                for step in self.steps[-self.repeat_last:]: self.run_step(replace_vars, step)
+
+    def run_step(self, replace_vars, step):
+        if (range_data:=step.get("range")) or (transition_data:=step.get("transition")):
+            if range_data:
+                for i in range(range_data.get("start", 0), range_data.get("stop", 10), range_data.get("step", 1)):
+                    self.run_modify(step.get("modify", {}), {**replace_vars, "i":i})
+                    if not self.clever_sleep(self.wait_time if step["sleep"] == "wait_time" else step["sleep"]): return
+            elif transition_data:
+                for rgb in self.led_controller.transition(transition_data.get("red"), transition_data.get("green"), transition_data.get("blue")):
+                    self.run_modify(step.get("modify", {}), {**replace_vars, "r":rgb[0], "g": rgb[1], "b": rgb[2]})
+                    if not self.clever_sleep(self.wait_time if step["sleep"] == "wait_time" else step["sleep"]): return
+        else:
+            self.clever_sleep(step["sleep"])
 
     def run_modify(self, modify, replace_vars):
         for color, calc in modify.items():
