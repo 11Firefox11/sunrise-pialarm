@@ -13,37 +13,37 @@ ALARM_JSONSCHEMA = {
             "items": {
                 "type": "object",
                 "properties": {
-                "sleep": { "oneOf": [ { "type": "string" }, { "type": "number" } ] },
-                "range": {
-                    "type": "object",
-                    "properties": {
-                    "start": { "type": "number", "pattern": ALARM_MODIFY_REGEX_PATTERN },
-                    "stop": { "type": "number", "pattern": ALARM_MODIFY_REGEX_PATTERN },
-                    "step": { "type": "number", "pattern": ALARM_MODIFY_REGEX_PATTERN }
+                    "sleep": { "oneOf": [ { "type": "string" }, { "type": "number" } ] },
+                    "range": {
+                        "type": "object",
+                        "properties": {
+                        "start": { "type": "number", "pattern": ALARM_MODIFY_REGEX_PATTERN },
+                        "stop": { "type": "number", "pattern": ALARM_MODIFY_REGEX_PATTERN },
+                        "step": { "type": "number", "pattern": ALARM_MODIFY_REGEX_PATTERN }
+                        },
+                        "required": [],
+                        "additionalProperties": False
                     },
-                    "required": [],
-                    "additionalProperties": False
-                },
-                "transition": {
-                    "type": "object",
-                    "properties": {
-                    "red": { "type": "number" },
-                    "green": { "type": "number" },
-                    "blue": { "type": "number" }
+                    "transition": {
+                        "type": "object",
+                        "properties": {
+                        "red": { "type": "number" },
+                        "green": { "type": "number" },
+                        "blue": { "type": "number" }
+                        },
+                        "required": [],
+                        "additionalProperties": False
                     },
-                    "required": [],
-                    "additionalProperties": False
-                },
-                "modify": {
-                    "type": "object",
-                    "properties": {
-                    "red": { "type": "string" },
-                    "green": { "type": "string" },
-                    "blue": { "type": "string" }
-                    },
-                    "required": [],
-                    "additionalProperties": False
-                }
+                    "modify": {
+                        "type": "object",
+                        "properties": {
+                        "red": { "type": "string" },
+                        "green": { "type": "string" },
+                        "blue": { "type": "string" }
+                        },
+                        "required": [],
+                        "additionalProperties": False
+                    }
                 },
                 "required": ["sleep"],
                 "additionalProperties": False
