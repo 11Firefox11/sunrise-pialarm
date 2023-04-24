@@ -23,5 +23,15 @@ class AlarmRunner:
         self.repeat_last = self.parsed_config.get("repeat_last")
         self.steps = self.parsed_config["steps"]
 
-
-AlarmRunner()
+    @staticmethod
+    def clever_sleep(val: float):
+        PIALARM_RUNNING = environ.get("PIALARM_RUNNING", "False")
+        if PIALARM_RUNNING == "False":
+            LedController()
+            return False
+        else:
+            if val > 2: 
+                time_sleep(2)
+                return AlarmRunner.clever_sleep(val-2)
+            else: time_sleep(val)
+            return True
