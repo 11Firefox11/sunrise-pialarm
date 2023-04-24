@@ -1,0 +1,103 @@
+{
+    "wait_time": 0.1,
+    "when_yellow": 146,
+    "repeat_last": 2,
+    "steps": [
+        {
+            "sleep": "wait_time",
+            "range": {
+                "start": 3,
+                "stop": 15,
+                "step": 1
+            },
+            "modify": {
+                "blue": "i"
+            }
+        },
+        {
+            "sleep": "wait_time",
+            "range": {
+                "start": 1,
+                "stop": 30,
+                "step": 1
+            },
+            "modify": {
+                "blue": "blue - (i * 2)",
+                "red": "i",
+                "green": "i * 0.5"
+            }
+        },
+        {
+            "sleep": "wait_time",
+            "transition": {
+                "red": 45,
+                "green": 12,
+                "blue": 8
+            },
+            "modify": {
+                "red": "r",
+                "green": "g",
+                "blue": "b"
+            }
+        },
+        {
+            "sleep": 1
+        },
+        {
+            "sleep": "wait_time",
+            "range": {
+                "start": 50,
+                "stop": 101,
+                "step": 1
+            },
+            "modify": {
+                "red": "i",
+                "green": "i * 0.75"
+            }
+        },
+        {
+            "sleep": 3
+        },
+        {
+            "sleep": "wait_time",
+            "range": {
+                "start": 150,
+                "stop": 151,
+                "step": 1
+            },
+            "modify": {
+                "red": "i",
+                "green": "i * 0.75"
+            }
+        },
+        {
+            "sleep": 3
+        },
+        {
+            "sleep": 0.01,
+            "range": {
+                "start": 0,
+                "stop": 256,
+                "step": 5
+            },
+            "modify": {
+                "blue": "i",
+                "red": "i",
+                "green": "i"
+            }
+        },
+        {
+            "sleep": 0.01,
+            "range": {
+                "start": 255,
+                "stop": 0,
+                "step": -5
+            },
+            "modify": {
+                "blue": "i",
+                "red": "i",
+                "green": "i"
+            }
+        }
+    ]
+}
