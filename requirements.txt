@@ -1,0 +1,6 @@
+attrs==23.1.0
+colour==0.1.5
+jsonschema==4.17.3
+pigpio==1.78
+pyrsistent==0.19.3
+PySimpleGUI==4.60.4
