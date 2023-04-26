@@ -13,6 +13,8 @@ There are some basic settings in `environment_variables.py`
 | Name | Type | Description |
 | --- | --- | --- |
 | `DEV_MODE` | `bool` | If it is on, then a `PySimpleGUI` window will serve as the LED instead of changing the actual PI's state (with `pigpio`). |
+| `WEB_SERVER_IP` | `str` | Web server IP address. |
+| `WEB_SERVER_PORT` | `int` | Web server port. |
 | `CODES_JSON_PATH` | `str` | Where the [codes](#codes) are held for each month day. |
 | `ALARM_JSON_PATH` | `str` | Where the [main alarm/sunrise config](#sunrise-settings) is at. |
 | `SETTINGS_JSON_PATH` | `str` | The [alarm time and web server settings](#alarm-and-web-server-settings) file path. |

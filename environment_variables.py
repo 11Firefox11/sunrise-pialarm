@@ -1,4 +1,6 @@
 DEV_MODE = False
+WEB_SERVER_IP = "0.0.0.0"
+WEB_SERVER_PORT = 5000
 CODES_JSON_PATH = "codes.json"
 ALARM_JSON_PATH = "alarm.json"
 SETTINGS_JSON_PATH = "settings.json"

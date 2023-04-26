@@ -10,7 +10,7 @@ from flask import jsonify
 from threading import Thread
 from os import environ, path
 
-from environment_variables import CODES_JSON_PATH, ALARM_JSON_PATH, SETTINGS_JSON_PATH
+from environment_variables import CODES_JSON_PATH, ALARM_JSON_PATH, SETTINGS_JSON_PATH, WEB_SERVER_IP, WEB_SERVER_PORT
 from settings_manager import SettingsManager
 
 class flaskManager:
@@ -46,7 +46,7 @@ class ServerThread(Thread):
 
     def __init__(self, app):
         Thread.__init__(self)
-        self.server = make_server("0.0.0.0", 5000, app)
+        self.server = make_server(WEB_SERVER_IP, WEB_SERVER_PORT, app)
         self.ctx = app.app_context()
         self.ctx.push()
 
