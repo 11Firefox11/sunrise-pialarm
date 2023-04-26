@@ -6,6 +6,8 @@ from jsonschema import validate as json_validate
 from jsonschema.exceptions import ValidationError
 from numexpr import evaluate as ne_eval
 
+from environment_variables import CLEVER_SLEEP_SECS_SEGMENTS
+
 ALARM_MODIFY_REGEX_PATTERN = "^(\(|\)|\d+\.\d+|\d+|red|blue|green|[+\-*/%]|i|\s)*$"
 ALARM_JSONSCHEMA = {
     "type": "object",
@@ -96,6 +98,7 @@ class AlarmRunner:
                     self.run_modify(step.get("modify", {}), {**replace_vars, "r":rgb[0], "g": rgb[1], "b": rgb[2]})
                     if not self.clever_sleep(self.wait_time if step["sleep"] == "wait_time" else step["sleep"]): return
         else:
+            self.run_modify(step.get("modify", {}))
             self.clever_sleep(step["sleep"])
 
     def run_modify(self, modify, replace_vars):
