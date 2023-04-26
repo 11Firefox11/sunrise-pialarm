@@ -98,7 +98,7 @@ class AlarmRunner:
                     self.run_modify(step.get("modify", {}), {**replace_vars, "r":rgb[0], "g": rgb[1], "b": rgb[2]})
                     if not self.clever_sleep(self.wait_time if step["sleep"] == "wait_time" else step["sleep"]): return
         else:
-            self.run_modify(step.get("modify", {}))
+            self.run_modify(step.get("modify", {}), replace_vars)
             self.clever_sleep(step["sleep"])
 
     def run_modify(self, modify, replace_vars):
@@ -111,8 +111,12 @@ class AlarmRunner:
             self.led_controller.reset()
             return False
         else:
-            if val > CLEVER_SLEEP_SECS_SEGMENTS: 
-                time_sleep(CLEVER_SLEEP_SECS_SEGMENTS)
-                return self.clever_sleep(val-CLEVER_SLEEP_SECS_SEGMENTS)
-            else: time_sleep(val)
-            return True
+            try:
+                if val > CLEVER_SLEEP_SECS_SEGMENTS: 
+                    time_sleep(CLEVER_SLEEP_SECS_SEGMENTS)
+                    return self.clever_sleep(val-CLEVER_SLEEP_SECS_SEGMENTS)
+                else: time_sleep(val)
+                return True
+            except KeyboardInterrupt:
+                self.led_controller.reset()
+                return False

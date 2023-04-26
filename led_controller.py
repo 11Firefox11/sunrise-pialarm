@@ -31,7 +31,7 @@ class LedController:
                     window.Close()
                 except Exception as x:
                     window.Close()
-            gui_thread = Thread(target=gui_thread)
+            gui_thread = Thread(target=gui_thread, daemon=True)
             gui_thread.start()
         self.red = r
         self.green = g
