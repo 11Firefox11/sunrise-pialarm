@@ -1,6 +1,6 @@
 {
-    "wait_time": 0.1,
-    "when_yellow": 146,
+    "wait_time": 3.6,
+    "when_yellow": 558,
     "repeat_last": 2,
     "steps": [
         {
@@ -41,9 +41,6 @@
             }
         },
         {
-            "sleep": 1
-        },
-        {
             "sleep": "wait_time",
             "range": {
                 "start": 50,
@@ -56,7 +53,7 @@
             }
         },
         {
-            "sleep": 3
+            "sleep": 30
         },
         {
             "sleep": "wait_time",
@@ -74,7 +71,7 @@
             "sleep": 3
         },
         {
-            "sleep": 0.01,
+            "sleep": 0.02,
             "range": {
                 "start": 0,
                 "stop": 256,
@@ -87,7 +84,7 @@
             }
         },
         {
-            "sleep": 0.01,
+            "sleep": 0.02,
             "range": {
                 "start": 255,
                 "stop": 0,
