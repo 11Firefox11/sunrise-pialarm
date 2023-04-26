@@ -19,7 +19,7 @@ class flaskManager:
         self.alarm_schedule = None
         environ["PIALARM_RUNNING"] = "False"
 
-    def stopAlarm(self):
+    def stop_alarm(self):
         self.alarm_schedule.shutdown()
         environ["PIALARM_RUNNING"] = "False"
 
