@@ -1,4 +1,4 @@
-DEV_MODE = True
+DEV_MODE = False
 CODES_JSON_PATH = "codes.json"
 ALARM_JSON_PATH = "alarm.json"
 SETTINGS_JSON_PATH = "settings.json"
