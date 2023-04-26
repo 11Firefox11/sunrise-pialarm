@@ -10,16 +10,16 @@ It works with Python 3, install the dependencies from the `requirements.txt`.
 ## Configuration
 ### Environment variables
 There are some basic settings in `environment_variables.py`
-| Name | Type | Description |
-| --- | --- | --- |
-| `DEV_MODE` | `bool` | If it is on, then a `PySimpleGUI` window will serve as the LED instead of changing the actual PI's state (with `pigpio`). |
-| `WEB_SERVER_IP` | `str` | Web server IP address. |
-| `WEB_SERVER_PORT` | `int` | Web server port. |
-| `CODES_JSON_PATH` | `str` | Where the [codes](#codes) are held for each month day. |
-| `ALARM_JSON_PATH` | `str` | Where the [main alarm/sunrise config](#sunrise-settings) is at. |
-| `SETTINGS_JSON_PATH` | `str` | The [alarm time and web server settings](#alarm-and-web-server-settings) file path. |
-| `RGB_PINS` | `dict` | The GPIO pin number for each color: `red`, `green`, `blue`. |
-| `CLEVER_SLEEP_SECS_SEGMENTS` | `int` | How frequently the alarm will check if it has been turned off. |
+| Name                         | Type   | Description                                                                                                               |
+|------------------------------|--------|---------------------------------------------------------------------------------------------------------------------------|
+| `DEV_MODE`                   | `bool` | If it is on, then a `PySimpleGUI` window will serve as the LED instead of changing the actual PI's state (with `pigpio`). |
+| `WEB_SERVER_IP`              | `str`  | Web server IP address.                                                                                                    |
+| `WEB_SERVER_PORT`            | `int`  | Web server port.                                                                                                          |
+| `CODES_JSON_PATH`            | `str`  | Where the [codes](#codes) are held for each month day.                                                                    |
+| `ALARM_JSON_PATH`            | `str`  | Where the [main alarm/sunrise config](#sunrise-settings) is at.                                                           |
+| `SETTINGS_JSON_PATH`         | `str`  | The [alarm time and web server settings](#alarm-and-web-server-settings) file path.                                       |
+| `RGB_PINS`                   | `dict` | The GPIO pin number for each color: `red`, `green`, `blue`.                                                               |
+| `CLEVER_SLEEP_SECS_SEGMENTS` | `int`  | How frequently the alarm will check if it has been turned off.                                                            |
 
 ### Codes
 Before starting make sure to run `generate_codes.py`. This will write out the codes for each day. These are shown once, then they are hashed. Write these down in order to stop the alarm later. 31 codes are generated, meaning the codes are same for each month. (The hashed codes will be at `CODES_JSON_PATH`.)
