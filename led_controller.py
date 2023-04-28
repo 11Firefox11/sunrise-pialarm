@@ -9,8 +9,7 @@ def rgb_value_checker(func):
     def wrapper(self, val):
         if val < 0: val = 0
         elif val > 255: val = 255
-        elif type(val) == float:
-            val = floor(val)
+        elif type(val) == float: val = floor(val)
         return func(self, val)
     return wrapper
 
@@ -42,9 +41,9 @@ class LedController:
         if r == None: r = self.red
         if g == None: g = self.green
         if b == None: b = self.blue
-        t = Color(rgb=(self.red/255, self.green/255, self.blue/255)).range_to(Color(rgb=(r/255, g/255, b/255)), steps)
+        transition_colors = Color(rgb=(self.red/255, self.green/255, self.blue/255)).range_to(Color(rgb=(r/255, g/255, b/255)), steps)
         toReturn = []
-        for c in t:
+        for c in transition_colors:
             if c not in toReturn: toReturn.append(c)
         return [[255*c.red, 255*c.green, 255*c.blue] for c in toReturn]
 
