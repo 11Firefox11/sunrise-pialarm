@@ -5,7 +5,7 @@ It has a simple web interface where the alarm time can be set, for this purpose 
 
 # Documentation
 ## Python related
-It works with Python 3, install the dependencies from the `requirements.txt`.
+It works with Python 3 (tested with Python 3.10), install the dependencies from the `requirements.txt`. 
 
 ## Configuration
 ### Environment variables
