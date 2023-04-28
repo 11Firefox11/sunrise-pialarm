@@ -36,7 +36,8 @@ ALARM_JSONSCHEMA = {
                         "properties": {
                         "red": { "type": "number" },
                         "green": { "type": "number" },
-                        "blue": { "type": "number" }
+                        "blue": { "type": "number" },
+                        "steps": { "type": "number" }
                         },
                         "required": [],
                         "additionalProperties": False
@@ -94,7 +95,7 @@ class AlarmRunner:
                     self.run_modify(step.get("modify", {}), {**replace_vars, "i":i})
                     if not self.clever_sleep(self.wait_time if step["sleep"] == "wait_time" else step["sleep"]): return
             elif transition_data:
-                for rgb in self.led_controller.transition(transition_data.get("red"), transition_data.get("green"), transition_data.get("blue")):
+                for rgb in self.led_controller.transition(transition_data.get("red"), transition_data.get("green"), transition_data.get("blue"), transition_data.get("steps", 255)):
                     self.run_modify(step.get("modify", {}), {**replace_vars, "r":rgb[0], "g": rgb[1], "b": rgb[2]})
                     if not self.clever_sleep(self.wait_time if step["sleep"] == "wait_time" else step["sleep"]): return
         else:

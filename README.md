@@ -35,7 +35,7 @@ The JSON must be an object. It operates with steps. It has 3 settings:
 Steps change the light, the code will execute step after step. It is an array. There are two actions: `range` and `transition` each iterate and change the rgb colors based on the `modify`. Properties of a `step`:
 - `sleep`: How much time should the step wait, or should it wait (if `range` or `transtion` is defined) after each modify related iteration. Can be any number or `"wait_time"`. This is required. (Note: a simple wait step can be created too.)
 - `range`: `start`, `stop`, `step` these 3 properties can be set (integers), it is a [Python range](https://docs.python.org/3/library/functions.html#func-range) in a for loop where each iteration the `modify` is run.
-- `transition`: To calculate the transition to a color. `red`, `green`, `blue` can be set (integers).
+- `transition`: To calculate the transition to a color. `red`, `green`, `blue` can be set (integers). Steps can be defined with the `steps` property, the default is 255 meaning it will step the smallest possible.
 - `modify`: What will be modified at this step or (if `range` or `transtion` is defined) at each iteration. Any arithmetic calculation can be used (parentheses too). Few built in variables can be used:
   - `red`, `green` or `blue` to get the current color values.
   - If it is running in a `range`, then use `i` to get the current iteration's number.
