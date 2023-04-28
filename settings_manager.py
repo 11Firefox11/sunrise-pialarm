@@ -5,9 +5,9 @@ from datetime import datetime
 from hashlib import sha1
 
 class SettingsManager:
-    def __init__(self, when_yellow, codes_path="codes.json", config_path="settings.json") -> None:
+    def __init__(self, when_yellow, passcodes_path="codes.json", config_path="settings.json") -> None:
         self.when_yellow = when_yellow
-        self.codes_path = codes_path
+        self.passcodes_path = passcodes_path
         self.config_path = config_path
         self.turn_on_at = []
         self.turn_off_at = []
@@ -20,16 +20,16 @@ class SettingsManager:
             else: setattr(self, key, val)
         self.turn_on_at.append([])
         self.alarm_at = settings["alarm_at"]
-        self.codes = json_load(open(self.codes_path, encoding="UTF-8"))
+        self.passcodes = json_load(open(self.passcodes_path, encoding="UTF-8"))
 
     def set_alarm(self, listTime: list):
         self.alarm_at = listTime
         with open(self.config_path, "w") as f: f.write(self.json)
 
-    def stop_alarm(self, code: str): return sha1(code.encode()).hexdigest() == self.today_code
+    def stop_alarm(self, passcode: str): return sha1(passcode.encode()).hexdigest() == self.today_passcode
 
     @property
-    def today_code(self): return self.codes[datetime.now().day-1]
+    def today_passcode(self): return self.passcodes[datetime.now().day-1]
 
     @property
     def alarm_at(self): return self._alarm_at

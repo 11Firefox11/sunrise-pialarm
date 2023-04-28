@@ -10,7 +10,7 @@ from flask import jsonify
 from threading import Thread
 from os import environ, path
 
-from environment_variables import CODES_JSON_PATH, ALARM_JSON_PATH, SETTINGS_JSON_PATH, WEB_SERVER_IP, WEB_SERVER_PORT
+from environment_variables import PASSCODES_JSON_PATH, ALARM_JSON_PATH, SETTINGS_JSON_PATH, WEB_SERVER_IP, WEB_SERVER_PORT
 from settings_manager import SettingsManager
 
 class flaskManager:
@@ -109,7 +109,7 @@ if __name__ == "__main__":
     this_dir = path.dirname(path.realpath(__file__))
     generate_full_path = lambda p: path.join(this_dir, p)
     alarm = AlarmRunner(generate_full_path(ALARM_JSON_PATH))
-    settings = SettingsManager(alarm.when_yellow, generate_full_path(CODES_JSON_PATH), generate_full_path(SETTINGS_JSON_PATH))
+    settings = SettingsManager(alarm.when_yellow, generate_full_path(PASSCODES_JSON_PATH), generate_full_path(SETTINGS_JSON_PATH))
     manager = flaskManager()
     now = datetime.now()
     now = settings.time_list_to_secs([now.hour, now.minute])

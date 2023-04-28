@@ -1,7 +1,7 @@
 # Sunrise Pialarm
 Python alarm running on a Raspberry Pi which controls a LED strip. An alarm clock that is not like any, it imitates the sunrise.
 
-It has a simple web interface where the alarm time can be set, for this purpose the web server only turns on in a specified time period. The web interface turns back on before the alarm goes off, so it can be turned off without waiting. The alarm time indicates when the sunrise is at its brightest, yellow phase. To turn off the alarm a code is required which is different for each day of the month. The light goes off, the web server goes off again.
+It has a simple web interface where the alarm time can be set, for this purpose the web server only turns on in a specified time period. The web interface turns back on before the alarm goes off, so it can be turned off without waiting. The alarm time indicates when the sunrise is at its brightest, yellow phase. To turn off the alarm a passcode is required which is different for each day of the month. The light goes off, the web server goes off again.
 
 # Documentation
 ## Python related
@@ -15,14 +15,14 @@ There are some basic settings in `environment_variables.py`
 | `DEV_MODE`                   | `bool` | If it is on, then a `PySimpleGUI` window will serve as the LED instead of changing the actual PI's state (with `pigpio`). |
 | `WEB_SERVER_IP`              | `str`  | Web server IP address.                                                                                                    |
 | `WEB_SERVER_PORT`            | `int`  | Web server port.                                                                                                          |
-| `CODES_JSON_PATH`            | `str`  | Where the [codes](#codes) are held for each month day.                                                                    |
+| `PASSCODES_JSON_PATH`        | `str`  | Where the [passcodes](#passcodes) are held for each month day.                                                                    |
 | `ALARM_JSON_PATH`            | `str`  | Where the [main alarm/sunrise config](#sunrise-settings) is at.                                                           |
 | `SETTINGS_JSON_PATH`         | `str`  | The [alarm time and web server settings](#alarm-and-web-server-settings) file path.                                       |
 | `RGB_PINS`                   | `dict` | The GPIO pin number for each color: `red`, `green`, `blue`.                                                               |
 | `CLEVER_SLEEP_SECS_SEGMENTS` | `int`  | How frequently the alarm will check if it has been turned off.                                                            |
 
-### Codes
-Before starting make sure to run `generate_codes.py`. This will write out the codes for each day. These are shown once, then they are hashed. Write these down in order to stop the alarm later. 31 codes are generated, meaning the codes are same for each month. (The hashed codes will be at `CODES_JSON_PATH`.)
+### Passcodes
+Before starting make sure to run [`generate_passcodes.py`](generate_passcodes.py). This will write out the passcodes for each day. These are shown once, then they are hashed. Write these down in order to stop the alarm later. 31 passcodes are generated, meaning the passcodes are same for each month. (The hashed passcodes will be at `PASSCODES_JSON_PATH`.)
 
 ### Sunrise settings
 There is a basic alarm included in the repository ([`alarm.json`](alarm.json)). Which is a sunrise that is about 15 minutes long. Feel free to use this, or you can create your own one with the easy methods I made.
