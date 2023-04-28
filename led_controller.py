@@ -1,6 +1,5 @@
 from colour import Color
 from environment_variables import RGB_PINS, DEV_MODE
-from math import floor
 if not DEV_MODE: from pigpio import pi 
 if DEV_MODE: 
     import PySimpleGUI as sg
@@ -11,7 +10,7 @@ def rgb_value_checker(func):
         if val < 0: val = 0
         elif val > 255: val = 255
         elif type(val) == float:
-            val = round(val)
+            val = floor(val)
         return func(self, val)
     return wrapper
 
@@ -55,7 +54,7 @@ class LedController:
     @red.setter
     @rgb_value_checker
     def red(self, val):
-        self._r = floor(val)
+        self._r = val
         if not DEV_MODE: self.pi.set_PWM_dutycycle(RGB_PINS["red"], self._r)
 
     @property
@@ -64,7 +63,7 @@ class LedController:
     @green.setter
     @rgb_value_checker
     def green(self, val):
-        self._g = floor(val)
+        self._g = val
         if not DEV_MODE: self.pi.set_PWM_dutycycle(RGB_PINS["green"], self._g)
 
     @property
@@ -73,5 +72,5 @@ class LedController:
     @blue.setter
     @rgb_value_checker
     def blue(self, val):
-        self._b = floor(val)
+        self._b = val
         if not DEV_MODE: self.pi.set_PWM_dutycycle(RGB_PINS["blue"], self._b)
