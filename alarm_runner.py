@@ -100,7 +100,7 @@ class AlarmRunner:
                     if not self.clever_sleep(self.wait_time if step["sleep"] == "wait_time" else step["sleep"]): return
         else:
             self.run_modify(step.get("modify", {}), replace_vars)
-            self.clever_sleep(step["sleep"])
+            if not self.clever_sleep(step["sleep"]): return
 
     def run_modify(self, modify, replace_vars):
         for color, calc in modify.items():
