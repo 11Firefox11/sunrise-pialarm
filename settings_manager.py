@@ -43,20 +43,20 @@ class SettingsManager:
     def realalarm_at(self):
         return self.extract_secs_from_time_list(self.alarm_at, self.when_yellow)
 
-    def extract_secs_from_time_list(self, t: list, secs: int):
-        s = self.time_list_to_secs(t) - secs
+    def extract_secs_from_time_list(self, time_list: list, secs: int):
+        s = self.time_list_to_secs(time_list) - secs
         h = s//(60*60)
         s = s - h*60*60
         return [int(h), int(s//60), int(round(s%60))]
 
     @staticmethod
-    def time_list_to_secs(t: list) -> float: return t[0]*60*60 + t[1]*60 + (0 if len(t) == 2 else t[2])
+    def time_list_to_secs(time_list: list) -> float: return time_list[0]*60*60 + time_list[1]*60 + (0 if len(time_list) == 2 else time_list[2])
 
     @staticmethod
-    def list_time_to_str(l: list):
-        extendInt = lambda n :  ("0" if n < 10 else "") + str(n)
-        return f"{extendInt(l[0])}:{extendInt(l[1])}"
+    def time_list_to_str(time_list: list):
+        to_extend = lambda n :  ("0" if n < 10 else "") + str(n)
+        return f"{to_extend(time_list[0])}:{to_extend(time_list[1])}"
 
     @property
     def json(self):
-        return json_dumps({"alarm_at": self.list_time_to_str(self.alarm_at), "server_state": {"turn_on_at": self.list_time_to_str(self.turn_on_at[0]), "turn_off_at": self.list_time_to_str(self.turn_off_at[0]), "turn_on_before_alarm": self.turn_on_before_alarm}})
+        return json_dumps({"alarm_at": self.time_list_to_str(self.alarm_at), "server_state": {"turn_on_at": self.time_list_to_str(self.turn_on_at[0]), "turn_off_at": self.time_list_to_str(self.turn_off_at[0]), "turn_on_before_alarm": self.turn_on_before_alarm}})

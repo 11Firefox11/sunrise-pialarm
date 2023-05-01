@@ -3,24 +3,18 @@ from datetime import datetime, timedelta
 from time import sleep
 from flask import Flask
 from apscheduler.schedulers.background import BackgroundScheduler
-from alarm_runner import AlarmRunner
-from flask import render_template
-from flask import request
-from flask import jsonify
+from flask import render_template, request, jsonify
 from threading import Thread
 from os import environ, path
 
 from environment_variables import PASSCODES_JSON_PATH, ALARM_JSON_PATH, SETTINGS_JSON_PATH, WEB_SERVER_IP, WEB_SERVER_PORT
 from settings_manager import SettingsManager
+from alarm_runner import AlarmRunner
 
 class flaskManager:
 
     def __init__(self) -> None:
         self.alarm_schedule = None
-        environ["PIALARM_RUNNING"] = "False"
-
-    def stop_alarm(self):
-        self.alarm_schedule.shutdown()
         environ["PIALARM_RUNNING"] = "False"
 
     def start(self, night=False):
@@ -64,13 +58,13 @@ def start_server():
     @app.route("/", methods=["GET"])
     def main_get():
         global alarm
-        return render_template(("waiting" if not environ["PIALARM_RUNNING"] == "True" else "running") + ".html", t=settings.list_time_to_str(settings.alarm_at))
+        return render_template(("waiting" if not environ["PIALARM_RUNNING"] == "True" else "running") + ".html", alarm_at=settings.time_list_to_str(settings.alarm_at))
 
     @app.route("/", methods=["POST"])
     def main_post():
         global settings, manager, alarm
         data = dict(request.json)
-        if not data or (environ["PIALARM_RUNNING"] == "False" and "t" not in data) or (environ["PIALARM_RUNNING"] == "True" and "code" not in data):
+        if not data or (environ["PIALARM_RUNNING"] == "False" and "alarm_at" not in data) or (environ["PIALARM_RUNNING"] == "True" and "code" not in data):
             return jsonify({"status": False})
         if environ["PIALARM_RUNNING"] == "True":
             if not settings.stop_alarm(data["code"]):
@@ -80,7 +74,7 @@ def start_server():
             to_stop_at = datetime.now() + timedelta(seconds=1)
             create_scheduler(manager.stop, [to_stop_at.hour, to_stop_at.minute, to_stop_at.second])
         else:
-            settings.set_alarm(data["t"])
+            settings.set_alarm(data["alarm_at"])
         return jsonify({"status": True})
 
     server = ServerThread(app)
@@ -97,10 +91,10 @@ def create_scheduler(func: callable, timeList: list, args: list = []):
     now = datetime.now()
     if len(timeList) == 2:
         timeList.append(0)
-    d = datetime(now.year, now.month, now.day, *timeList)
+    to_run_at = datetime(now.year, now.month, now.day, *timeList)
     if settings.time_list_to_secs([now.hour, now.minute, now.second]) > settings.time_list_to_secs([timeList[0], timeList[1], timeList[2]]):
-        d = d + timedelta(days=1)
-    sch.add_job(func, "date", args=args, run_date=d)
+        to_run_at = to_run_at + timedelta(days=1)
+    sch.add_job(func, "date", args=args, run_date=to_run_at)
     sch.start()
     return sch
 
