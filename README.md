@@ -43,10 +43,10 @@ Steps change the light, the code will execute step after step. It is an array. T
 
 ### Schedule settings
 Make sure you restart the app after editing `server_state` settings. The alarm will be scheduled after the web server goes off.
-- `alarm_at`: When the alarm will go off, the web interface will change this.
+- `alarm_at`: When the alarm will go off, the web interface will change this. It is in HH:MM format (string).
 - `server_state`:
-  - `turn_on_at`: When the web server should turn on at, so the alarm time can be set. It is in `HH:MM` format.
-  - `turn_off_at`: When the web server should turn off at, so the alarm can be scheduled. It is in `HH:MM` format.
+  - `turn_on_at`: When the web server should turn on at, so the alarm time can be set. It is in `HH:MM` format (string).
+  - `turn_off_at`: When the web server should turn off at, so the alarm can be scheduled. It is in `HH:MM` format (string).
   - `turn_on_before_alarm`: How many seconds before the sunrise start the web server should turn on, so it can be turned off before the alarm goes off. It is a number.
 
 # Contributions
