@@ -3,6 +3,8 @@ Python alarm running on a Raspberry Pi which controls a LED strip. An alarm cloc
 
 It has a simple web interface where the alarm time can be set, for this purpose the web server only turns on in a specified time period. The web interface turns back on before the alarm goes off, so it can be turned off without waiting. The alarm time indicates when the sunrise is at its brightest, yellow phase. To turn off the alarm a passcode is required which is different for each day of the month. The light goes off, the web server goes off again.
 
+Read more about it in my blog post series: [Sunrise Alarm Clock Using A LED Strip Series](https://tomoviktor.com/series/sunrise-pialarm/page/1/).
+
 # Documentation
 ## Python related
 It works with Python 3.8 or higher (tested with Python 3.10), install the dependencies from the `requirements.txt`. 
