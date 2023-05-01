@@ -41,7 +41,7 @@ Steps change the light, the code will execute step after step. It is an array. T
   - If it is running in a `range`, then use `i` to get the current iteration's number.
   - If it is running in a `transition`, then `r` `g` `b` can be used to get the transition related values.
 
-### Alarm and web server settings
+### Schedule settings
 Make sure you restart the app after editing `server_state` settings. The alarm will be scheduled after the web server goes off.
 - `alarm_at`: When the alarm will go off, the web interface will change this.
 - `server_state`:
