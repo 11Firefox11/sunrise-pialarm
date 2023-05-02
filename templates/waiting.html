@@ -21,7 +21,7 @@
                 'Content-Type': 'application/json'
                 },
                 body: JSON.stringify({
-                    t: document.getElementById("t").value
+                    alarm_at: document.getElementById("t").value
                 })
             }).then((val) => {
                 alert("Successfully updated.");
